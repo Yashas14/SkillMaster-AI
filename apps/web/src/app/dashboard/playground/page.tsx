@@ -5,6 +5,20 @@ import { useSession } from 'next-auth/react';
 
 type Language = 'python' | 'javascript' | 'typescript';
 
+type CodeIssue = {
+  severity: 'error' | 'warning' | 'info';
+  message: string;
+  suggestion?: string;
+};
+
+type CodeReview = {
+  error?: string;
+  score?: number;
+  summary?: string;
+  issues?: CodeIssue[];
+  strengths?: string[];
+};
+
 const SAMPLE_CODE: Record<Language, string> = {
   python: `def fibonacci(n):
     """Return the nth Fibonacci number."""
@@ -47,14 +61,14 @@ console.log("Tree traversal ready");`,
 };
 
 export default function CodePlaygroundPage() {
-  const { data: session } = useSession();
+  useSession();
   const [language, setLanguage] = useState<Language>('python');
   const [code, setCode] = useState(SAMPLE_CODE.python);
   const [stdin, setStdin] = useState('');
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isReviewing, setIsReviewing] = useState(false);
-  const [review, setReview] = useState<Record<string, unknown> | null>(null);
+  const [review, setReview] = useState<CodeReview | null>(null);
   const [activeTab, setActiveTab] = useState<'output' | 'review'>('output');
 
   const handleRun = async () => {
@@ -72,7 +86,7 @@ export default function CodePlaygroundPage() {
           ? data.stdout || '(no output)'
           : `Error:\n${data.stderr || data.error || 'Unknown error'}`
       );
-    } catch (e) {
+    } catch (_e) {
       setOutput('Failed to execute code. Check your connection.');
     } finally {
       setIsRunning(false);
@@ -90,7 +104,7 @@ export default function CodePlaygroundPage() {
       });
       const data = await res.json();
       setReview(data);
-    } catch (e) {
+    } catch (_e) {
       setReview({ error: 'Failed to get review' });
     } finally {
       setIsReviewing(false);
@@ -195,10 +209,10 @@ export default function CodePlaygroundPage() {
                         </div>
                       </div>
                     )}
-                    {review.issues?.length > 0 && (
+                    {(review.issues?.length ?? 0) > 0 && (
                       <div>
                         <h4 className="mb-2 font-semibold">Issues</h4>
-                        {(review.issues as { severity: string; message: string; suggestion?: string }[]).map((issue, i: number) => (
+                        {(review.issues ?? []).map((issue, i) => (
                           <div key={i} className={`mb-2 rounded-lg border-l-4 p-3 ${
                             issue.severity === 'error' ? 'border-red-500 bg-red-50 dark:bg-red-950' :
                             issue.severity === 'warning' ? 'border-yellow-500 bg-yellow-50 dark:bg-yellow-950' :
@@ -212,11 +226,11 @@ export default function CodePlaygroundPage() {
                         ))}
                       </div>
                     )}
-                    {review.strengths?.length > 0 && (
+                    {(review.strengths?.length ?? 0) > 0 && (
                       <div>
                         <h4 className="mb-2 font-semibold text-green-600">Strengths</h4>
                         <ul className="space-y-1 text-sm">
-                          {review.strengths.map((s: string, i: number) => (
+                          {(review.strengths ?? []).map((s, i) => (
                             <li key={i} className="flex gap-2">
                               <span className="text-green-500">✓</span> {s}
                             </li>
