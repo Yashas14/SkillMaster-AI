@@ -613,6 +613,28 @@ docker build -t skillmaster-bff -f apps/bff/Dockerfile .
 
 ---
 
+## 📸 Screenshots
+
+
+<img width="1903" height="912" alt="image" src="https://github.com/user-attachments/assets/fa8d6dd4-a1db-4033-b4f3-0c3c97677c31" />
+
+--
+<img width="1919" height="912" alt="image" src="https://github.com/user-attachments/assets/2a4a9deb-ae0c-49c8-89a0-c0350f9a8591" />
+
+--
+<img width="1919" height="905" alt="image" src="https://github.com/user-attachments/assets/de9d38b3-1742-4c6d-aad6-a233d90d2805" />
+
+--
+<img width="1919" height="916" alt="image" src="https://github.com/user-attachments/assets/75f65272-1a51-4fef-8eee-9a78ce53785c" />
+
+--
+<img width="1919" height="919" alt="image" src="https://github.com/user-attachments/assets/a74bb454-1a8b-42b7-8efb-2cb2d0fca881" />
+
+--
+<img width="1906" height="908" alt="image" src="https://github.com/user-attachments/assets/054f2c0c-9ad3-4938-84ec-b4eb1106f532" />
+
+---
+
 ## Contributing
 
 1. **Fork** the repository
