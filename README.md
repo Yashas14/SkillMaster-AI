@@ -613,7 +613,7 @@ docker build -t skillmaster-bff -f apps/bff/Dockerfile .
 
 ---
 
-## 📸 Screenshots
+## 📸 Snapshots
 
 
 <img width="1903" height="912" alt="image" src="https://github.com/user-attachments/assets/fa8d6dd4-a1db-4033-b4f3-0c3c97677c31" />
@@ -645,9 +645,12 @@ docker build -t skillmaster-bff -f apps/bff/Dockerfile .
 
 ---
 
-## License
+## 👤 Author
 
-MIT License — see [LICENSE](LICENSE) for details.
+**Yashas D**
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Yashas%20D-0A66C2?logo=linkedin&logoColor=white)](https://www.linkedin.com/in/yashasd2004/)
+[![GitHub](https://img.shields.io/badge/GitHub-Yashas14-181717?logo=github&logoColor=white)](https://github.com/Yashas14)
 
 ---
 
