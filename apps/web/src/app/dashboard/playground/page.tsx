@@ -54,7 +54,7 @@ export default function CodePlaygroundPage() {
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [isReviewing, setIsReviewing] = useState(false);
-  const [review, setReview] = useState<any>(null);
+  const [review, setReview] = useState<Record<string, unknown> | null>(null);
   const [activeTab, setActiveTab] = useState<'output' | 'review'>('output');
 
   const handleRun = async () => {
@@ -198,7 +198,7 @@ export default function CodePlaygroundPage() {
                     {review.issues?.length > 0 && (
                       <div>
                         <h4 className="mb-2 font-semibold">Issues</h4>
-                        {review.issues.map((issue: any, i: number) => (
+                        {(review.issues as { severity: string; message: string; suggestion?: string }[]).map((issue, i: number) => (
                           <div key={i} className={`mb-2 rounded-lg border-l-4 p-3 ${
                             issue.severity === 'error' ? 'border-red-500 bg-red-50 dark:bg-red-950' :
                             issue.severity === 'warning' ? 'border-yellow-500 bg-yellow-50 dark:bg-yellow-950' :
@@ -228,7 +228,7 @@ export default function CodePlaygroundPage() {
                 )}
               </div>
             ) : (
-              <p className="text-muted-foreground">Click "AI Review" to get feedback on your code.</p>
+              <p className="text-muted-foreground">Click &quot;AI Review&quot; to get feedback on your code.</p>
             )}
           </div>
         </div>

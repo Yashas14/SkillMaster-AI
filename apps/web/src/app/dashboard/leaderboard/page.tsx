@@ -25,7 +25,7 @@ const BADGES = [
   { id: '12', name: 'Legendary', description: 'Reach level 30', icon: '✨', category: 'milestone', rarity: 'legendary', earned: false },
 ];
 
-const LEADERBOARD = [
+const LEADERBOARD: { rank: number; name: string; xp: number; level: number; streak: number; avatar: null; isYou?: boolean }[] = [
   { rank: 1, name: 'Alex Chen', xp: 12500, level: 15, streak: 45, avatar: null },
   { rank: 2, name: 'Sarah Kim', xp: 11200, level: 14, streak: 30, avatar: null },
   { rank: 3, name: 'Mike Johnson', xp: 9800, level: 12, streak: 22, avatar: null },
@@ -166,7 +166,7 @@ export default function LeaderboardPage() {
                   <tr
                     key={entry.rank}
                     className={`border-b transition-colors ${
-                      (entry as any).isYou ? 'bg-blue-50 dark:bg-blue-950' : 'hover:bg-muted/50'
+                      entry.isYou ? 'bg-blue-50 dark:bg-blue-950' : 'hover:bg-muted/50'
                     }`}
                   >
                     <td className="px-4 py-3">
@@ -185,7 +185,7 @@ export default function LeaderboardPage() {
                           {entry.name[0]}
                         </div>
                         <span className="font-medium">{entry.name}</span>
-                        {(entry as any).isYou && (
+                        {entry.isYou && (
                           <span className="rounded-full bg-blue-100 px-2 py-0.5 text-xs font-medium text-blue-700">
                             You
                           </span>

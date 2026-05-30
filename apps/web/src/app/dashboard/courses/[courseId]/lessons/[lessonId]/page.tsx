@@ -4,6 +4,7 @@ import { useParams } from 'next/navigation';
 import { useState } from 'react';
 
 type ContentTab = 'content' | 'quiz' | 'notes' | 'discussion';
+type Lesson = { id: string; title: string; completed: boolean; duration: string; current?: boolean };
 
 export default function LessonPage() {
   const params = useParams();
@@ -49,7 +50,7 @@ useEffect(() => {
     `,
   };
 
-  const modules = [
+  const modules: { title: string; lessons: Lesson[] }[] = [
     {
       title: 'Getting Started',
       lessons: [
@@ -93,7 +94,7 @@ useEffect(() => {
                   <button
                     key={l.id}
                     className={`flex w-full items-center gap-3 rounded-lg px-3 py-2 text-sm transition-colors ${
-                      (l as any).current
+                      l.current
                         ? 'bg-primary/10 text-primary font-medium'
                         : 'text-muted-foreground hover:bg-muted hover:text-foreground'
                     }`}
@@ -101,7 +102,7 @@ useEffect(() => {
                     <span className={`flex h-5 w-5 items-center justify-center rounded-full text-[10px] ${
                       l.completed
                         ? 'bg-green-500 text-white'
-                        : (l as any).current
+                        : l.current
                           ? 'bg-primary text-primary-foreground'
                           : 'bg-muted text-muted-foreground'
                     }`}>

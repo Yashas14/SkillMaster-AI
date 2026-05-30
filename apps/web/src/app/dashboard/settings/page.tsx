@@ -2,6 +2,18 @@
 
 import { useState } from 'react';
 
+type Preferences = {
+  theme: string;
+  emailNotifications: boolean;
+  pushNotifications: boolean;
+  weeklyDigest: boolean;
+  learningReminders: boolean;
+  reducedMotion: boolean;
+  highContrast: boolean;
+  fontSize: string;
+  [key: string]: string | boolean;
+};
+
 export default function SettingsPage() {
   const [activeTab, setActiveTab] = useState('profile');
   const [profile, setProfile] = useState({
@@ -14,7 +26,7 @@ export default function SettingsPage() {
     timezone: 'UTC',
     language: 'en',
   });
-  const [preferences, setPreferences] = useState({
+  const [preferences, setPreferences] = useState<Preferences>({
     theme: 'system',
     emailNotifications: true,
     pushNotifications: true,
@@ -178,16 +190,16 @@ export default function SettingsPage() {
                     onClick={() =>
                       setPreferences({
                         ...preferences,
-                        [item.key]: !(preferences as any)[item.key],
+                        [item.key]: !preferences[item.key],
                       })
                     }
                     className={`relative h-6 w-11 rounded-full transition-colors ${
-                      (preferences as any)[item.key] ? 'bg-primary' : 'bg-muted'
+                      preferences[item.key] ? 'bg-primary' : 'bg-muted'
                     }`}
                   >
                     <span
                       className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
-                        (preferences as any)[item.key] ? 'translate-x-5' : ''
+                        preferences[item.key] ? 'translate-x-5' : ''
                       }`}
                     />
                   </button>
@@ -212,16 +224,16 @@ export default function SettingsPage() {
                     onClick={() =>
                       setPreferences({
                         ...preferences,
-                        [item.key]: !(preferences as any)[item.key],
+                        [item.key]: !preferences[item.key],
                       })
                     }
                     className={`relative h-6 w-11 rounded-full transition-colors ${
-                      (preferences as any)[item.key] ? 'bg-primary' : 'bg-muted'
+                      preferences[item.key] ? 'bg-primary' : 'bg-muted'
                     }`}
                   >
                     <span
                       className={`absolute left-0.5 top-0.5 h-5 w-5 rounded-full bg-white transition-transform ${
-                        (preferences as any)[item.key] ? 'translate-x-5' : ''
+                        preferences[item.key] ? 'translate-x-5' : ''
                       }`}
                     />
                   </button>

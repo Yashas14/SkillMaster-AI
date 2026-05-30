@@ -29,7 +29,7 @@ export default function CertificatesPage() {
   ];
 
   const [verifyInput, setVerifyInput] = useState('');
-  const [verifyResult, setVerifyResult] = useState<any>(null);
+  const [verifyResult, setVerifyResult] = useState<{ valid: boolean; message: string; blockchain_verified: boolean } | null>(null);
 
   const handleVerify = async () => {
     // In production: GET /api/v1/certificates/verify/{cert_number}
